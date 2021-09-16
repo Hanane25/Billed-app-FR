@@ -16,7 +16,7 @@ export default class {
     new Logout({ document, localStorage, onNavigate })
   }
 
-  handleClickNewBill = e => {
+  handleClickNewBill = (e) => {
     this.onNavigate(ROUTES_PATH['NewBill'])
   }
 
@@ -28,6 +28,7 @@ export default class {
   }
 
   // not need to cover this function by tests
+  //appels au back-end firebase
   getBills = () => {
     const userEmail = localStorage.getItem('user') ?
       JSON.parse(localStorage.getItem('user')).email : ""

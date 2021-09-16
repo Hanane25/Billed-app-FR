@@ -19,7 +19,23 @@ const row = (bill) => {
     `)
   }
 
+
 const rows = (data) => {
+
+  //faire un tri par date
+  if(data){
+    data.sort((a,b) => {
+      if (new Date(a.date).getTime() < new Date(b.date).getTime()){
+        return 1
+      }
+      if (new Date(a.date).getTime() > new Date(b.date).getTime()){
+        return -1
+      }
+      return 0
+    })
+
+  }
+
   return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
 }
 

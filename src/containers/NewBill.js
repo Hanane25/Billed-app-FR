@@ -19,15 +19,36 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    this.firestore
-      .storage
-      .ref(`justificatifs/${fileName}`)
-      .put(file)
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        this.fileUrl = url
-        this.fileName = fileName
-      })
+
+    //empêcher la saisie d'un document qui a une extension différente de jpg, jpeg ou png
+    
+    //split('.'): divise une chaine de caractère en sous chaines
+    //pop(): supprime le dernier élément d'un tableau et retourne cet élément
+    if (fileName.split('.').pop() === "jpg"
+      || fileName.split('.').pop() === "jpeg"
+      || fileName.split('.').pop() === "png")
+    {
+      this.firestore
+        .storage
+        .ref(`justificatifs/${fileName}`)
+        .put(file)
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          this.fileUrl = url
+          this.fileName = fileName
+        })
+      
+      //Activer le boutton submit
+      document.getElementById("btn-send-bill").disabled = false;
+
+    } else {
+
+      //désactiver le boutton submit
+      document.getElementById("btn-send-bill").disabled = true;
+      alert('Merci de télécharger un fichier jpg, jpeg ou png.')
+    }
+
+    
   }
   handleSubmit = e => {
     e.preventDefault()
