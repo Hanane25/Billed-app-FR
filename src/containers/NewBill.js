@@ -28,22 +28,20 @@ export default class NewBill {
 
     const fileExtension = fileName.split('.').pop()
 
-    if (( fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png")) {
+    if ( !fileExtension === "jpg" || !fileExtension === "jpeg" || !fileExtension === "png") {
 
       document.getElementById("correctFormat").innerText = ""
 
-      if (this.firestore) {
-        this.firestore
-        .storage
-        .ref(`justificatifs/${fileName}`)
-        .put(file)
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then(url => {
-          this.fileUrl = url
-          this.fileName = fileName
-        })
-      }
-
+      this.firestore
+      .storage
+      .ref(`justificatifs/${fileName}`)
+      .put(file)
+      .then(snapshot => snapshot.ref.getDownloadURL())
+      .then(url => {
+        this.fileUrl = url
+        this.fileName = fileName
+      })
+      
     } else {
  
       // reject storing image because wrong format
@@ -52,7 +50,6 @@ export default class NewBill {
     }
   }
 
-  
   handleSubmit = e => {
     e.preventDefault()
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)

@@ -47,7 +47,7 @@ describe("Given I am connected as an employee", () => {
   })
 
   describe("When I am on NewBill Page and I add an file in incorrect format", () => {
-    test("Then the file shouldn't be uploaded", () => {
+    test("Then the file shouldn't be uploaded and I have an error message", () => {
 
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname });
