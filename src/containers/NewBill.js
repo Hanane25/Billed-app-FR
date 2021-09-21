@@ -15,6 +15,7 @@ export default class NewBill {
     this.fileName = null
     new Logout({ document, localStorage, onNavigate })
   }
+
   handleChangeFile = e => {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
@@ -24,11 +25,15 @@ export default class NewBill {
     
     //split('.'): divise une chaine de caractère en sous chaines
     //pop(): supprime le dernier élément d'un tableau et retourne cet élément
-    if (fileName.split('.').pop() === "jpg"
-      || fileName.split('.').pop() === "jpeg"
-      || fileName.split('.').pop() === "png")
-    {
-      this.firestore
+
+    const fileExtension = fileName.split('.').pop()
+
+    if (( fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png")) {
+
+      document.getElementById("correctFormat").innerText = ""
+
+      if (this.firestore) {
+        this.firestore
         .storage
         .ref(`justificatifs/${fileName}`)
         .put(file)
@@ -37,19 +42,17 @@ export default class NewBill {
           this.fileUrl = url
           this.fileName = fileName
         })
-      
-      //Activer le boutton submit
-      document.getElementById("btn-send-bill").disabled = false;
+      }
 
     } else {
-
-      //désactiver le boutton submit
-      document.getElementById("btn-send-bill").disabled = true;
-      alert('Merci de télécharger un fichier jpg, jpeg ou png.')
+ 
+      // reject storing image because wrong format
+      this.document.querySelector(`input[data-testid='file']`).value = null;
+      this.document.getElementById("wrongFormat").innerText = "Seul les images avec l'extension suivante sont autorisées : jpg, jpeg ou png"
     }
-
-    
   }
+
+  
   handleSubmit = e => {
     e.preventDefault()
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)

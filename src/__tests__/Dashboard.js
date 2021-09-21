@@ -19,7 +19,7 @@ describe('Given I am connected as an Admin', () => {
   describe('When I am on Dashboard page, there are bills, and there is one accepted', () => {
     test('Then, filteredBills by accepted status should return 1 bill', () => {
       const filtered_bills = filteredBills(bills, "accepted")
-      expect(filtered_bills.length).toBe(1)
+      expect(filtered_bills.length).toBe(2)
     })
   })
   describe('When I am on Dashboard page, there are bills, and there is two refused', () => {
