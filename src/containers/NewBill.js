@@ -28,7 +28,7 @@ export default class NewBill {
 
     const fileExtension = fileName.split('.').pop()
 
-    if ( !fileExtension === "jpg" || !fileExtension === "jpeg" || !fileExtension === "png") {
+    if ( fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
 
       document.getElementById("correctFormat").innerText = ""
 
