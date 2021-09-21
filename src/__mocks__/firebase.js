@@ -88,7 +88,6 @@ post: async (request) => {
         commentary: request.commentary,
         type: request.type,
         fileUrl: request.fileUrl,
-        fileUrl: request.fileUrl,
       },
     ]
   })
