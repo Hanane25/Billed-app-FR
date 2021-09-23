@@ -29,8 +29,8 @@ describe("Given I am connected as an employee", () => {
       const handleChangeFile = jest.fn(newBill.handleChangeFile);
 
       const inputFile = screen.getByTestId("file")
-      const correct = document.getElementById("correctFormat")
-      const correctMessage = undefined
+      const error = document.getElementById("wrongFormat")
+      const errorMessage = "Seul les images avec l'extension suivante sont autorisées : jpg, jpeg ou png"
 
       inputFile.addEventListener("change", handleChangeFile);
       fireEvent.change(inputFile, {
@@ -40,7 +40,7 @@ describe("Given I am connected as an employee", () => {
       })
 
       expect(handleChangeFile).toHaveBeenCalled()
-      expect(correct.innerText).toBe(correctMessage)
+      expect(error.innerText).toBe(".png")
 
     })
 

@@ -28,9 +28,11 @@ export default class NewBill {
 
     const fileExtension = fileName.split('.').pop()
 
+    console.log(file)
+
     if ( fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
 
-      document.getElementById("correctFormat").innerText = ""
+      this.document.getElementById("wrongFormat").innerText = ""
 
       this.firestore
       .storage
