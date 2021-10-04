@@ -160,9 +160,10 @@ export default class {
       $(`#arrow-icon${this.index}`).css({ 
         transform: 'rotate(0deg)'
       })
+      this.listsStatus[`isOpen${index}`] = true;
       $(`#status-bills-container${this.index}`)
         .html(cards(filteredBills(bills, getStatus(this.index))))
-      this.listsStatus[`isOpen${index}`] = true;
+      
       //this.counter ++
     }
 
