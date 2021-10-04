@@ -32,8 +32,6 @@ export default class NewBill {
 
     if ( fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
 
-      this.document.getElementById("wrongFormat").innerText = ""
-
       this.firestore
       .storage
       .ref(`justificatifs/${fileName}`)
@@ -44,6 +42,8 @@ export default class NewBill {
         this.fileName = fileName
       })
       
+      this.document.getElementById("wrongFormat").innerText = ""
+
     } else {
  
       // reject storing image because wrong format

@@ -9,43 +9,6 @@ import BillsUI from "../views/BillsUI.js";
 
 
 describe("Given I am connected as an employee", () => {
-  describe("When I am on NewBill Page and I add a file in correct format", () => {
-    test("Then the file should be uploaded and the new bill should be created", () => {
-
-      const html = NewBillUI();
-      document.body.innerHTML = html;
-
-      const onNavigate = (pathname) => {
-        document.body.innerHTML = ROUTES({ pathname });
-      };
-
-      const newBill = new NewBill({
-        document,
-        onNavigate,
-        firestore: null,
-        localStorage: window.localStorage,
-      });
-
-      const handleChangeFile = jest.fn(newBill.handleChangeFile);
-
-      const inputFile = screen.getByTestId("file")
-      const error = document.getElementById("wrongFormat")
-      const errorMessage = "Seul les images avec l'extension suivante sont autorisées : jpg, jpeg ou png"
-
-      inputFile.addEventListener("change", handleChangeFile);
-      fireEvent.change(inputFile, {
-        target: {
-          files: [new File(["image.png"], "image.png", { type: "image/png" })]
-        }
-      })
-
-      expect(handleChangeFile).toHaveBeenCalled()
-      expect(error.innerText).toBe(".png")
-
-    })
-
-  })
-
   describe("When I am on NewBill Page and I add an file in incorrect format", () => {
     test("Then the file shouldn't be uploaded and I have an error message", () => {
 
